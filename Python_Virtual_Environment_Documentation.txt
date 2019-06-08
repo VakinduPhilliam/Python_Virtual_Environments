@@ -1,0 +1,35 @@
+Python Virtual Environment
+
+Notes:
+ 
+A virtual environment is a Python environment such that the Python interpreter, libraries and scripts installed into it are isolated from those installed in
+other virtual environments, and (by default) any libraries installed in a “system” Python, i.e., one which is installed as part of your operating system.
+ 
+A virtual environment is a directory tree which contains Python executable files and other files which indicate that it is a virtual environment.
+ 
+Common installation tools such as Setuptools and pip work as expected with virtual environments.
+In other words, when a virtual environment is active, they install Python packages into the virtual environment without needing to be told to do so
+explicitly.
+ 
+When a virtual environment is active (i.e., the virtual environment’s Python interpreter is running), the attributes sys.prefix and sys.exec_prefix point to
+the base directory of the virtual environment, whereas sys.base_prefix and sys.base_exec_prefix point to the non-virtual environment Python installation
+which was used to create the virtual environment. 
+
+If a virtual environment is not active, then sys.prefix is the same as sys.base_prefix and sys.exec_prefix is the same as sys.base_exec_prefix 
+(they all point to a non-virtual environment Python installation).
+ 
+When a virtual environment is active, any options that change the installation path will be ignored from all distutils configuration files to prevent
+projects being inadvertently installed outside of the virtual environment.
+ 
+When working in a command shell, users can make a virtual environment active by running an activate script in the virtual environment’s executables 
+directory (the precise filename is shell-dependent), which prepends the virtual environment’s directory for executables to the PATH environment variable 
+for the running shell. 
+
+There should be no need in other circumstances to activate a virtual environment—scripts installed into virtual environments have a “shebang” line which 
+points to the virtual environment’s Python interpreter. 
+
+This means that the script will run with that interpreter regardless of the value of PATH. On Windows, “shebang” line processing is supported if you have 
+the Python Launcher for Windows installed (this was added to Python in 3.3). 
+
+Thus, double-clicking an installed script in a Windows Explorer window should run the script with the correct interpreter without there needing to be any 
+reference to its virtual environment in PATH.

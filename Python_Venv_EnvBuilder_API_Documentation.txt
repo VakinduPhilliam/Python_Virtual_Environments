@@ -1,0 +1,38 @@
+Python Venv EnvBuilder API
+
+*********************************** EnvBuilder API *********************************************
+ 
+The high-level method described above makes use of a simple API which provides mechanisms for third-party virtual environment creators to customize
+environment creation according to their needs, the EnvBuilder class.
+
+class venv.EnvBuilder(system_site_packages=False, clear=False, symlinks=False, upgrade=False, with_pip=False, prompt=None)
+
+The EnvBuilder class accepts the following keyword arguments on instantiation:
+
+> system_site_packages – a Boolean value indicating that the system Python site-packages should be available to the environment (defaults to False).
+
+> clear – a Boolean value which, if true, will delete the contents of any existing target directory, before creating the environment.
+
+> symlinks – a Boolean value indicating whether to attempt to symlink the Python binary (and any necessary DLLs or other binaries, e.g. pythonw.exe), rather
+             than copying.
+
+> upgrade – a Boolean value which, if true, will upgrade an existing environment with the running Python - for use when that Python has been upgraded 
+            in-place (defaults to False).
+
+> with_pip – a Boolean value which, if true, ensures pip is installed in the virtual environment. This uses ensurepip with the --default-pip option.
+
+> prompt – a String to be used after virtual environment is activated (defaults to None which means directory name of the environment would be used).
+ 
+
+Creators of third-party virtual environment tools will be free to use the provided EnvBuilder class as a base class.
+ 
+The returned env-builder is an object which has a method, 'create', defined as follows.
+
+create(env_dir)
+
+This method takes as required argument the path (absolute or relative to the current directory) of the target directory which is to contain the virtual 
+environment. 
+
+The create method will either create the environment in the specified directory, or raise an appropriate exception.
+ 
+The create method of the EnvBuilder class illustrates the hooks available for subclass customization:
